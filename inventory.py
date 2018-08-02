@@ -23,10 +23,10 @@ conn.execute("INSERT INTO cotton VALUES ('ASH', 'M', 3)")
 conn.execute("INSERT INTO cotton VALUES ('ASH', 'L', 2)")
 conn.execute("INSERT INTO cotton VALUES ('BLACK', 'S', 7)")
 #DRIFIT
-conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'S', 6)")
-conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'M', 3)")
-conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'L', 2)")
-conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'XL', 7)")
+conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'S', 1)")
+conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'M', 2)")
+conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'L', 3)")
+conn.execute("INSERT INTO drifit VALUES ('DRIFIT', 'XL', 4)")
 ###########################################################################
 conn.commit
 
@@ -35,16 +35,8 @@ class database:
 		self.fetchall()
 		self.material(mat)
 
-	def cotton():
-		c.execute("SELECT * FROM cotton")
-		rows = c.fetchall()
-		return rows
-	def drifit():
-		c.execute("SELECT * FROM drifit")
-		rows = c.fetchall()
-		return rows
-
 	def material(mat):
 		c.execute("SELECT * FROM {}".format(mat))
 		rows = c.fetchall()
 		return rows
+

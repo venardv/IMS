@@ -8,6 +8,7 @@ from tkinter.ttk import *
 from inventory import *
 
 class mainWindow:
+	material = "cotton"
 	def __init__(self):
 		self.mainWidgets()
 
@@ -32,18 +33,26 @@ class mainWindow:
 		tree.pack(anchor = "w", side = "left", fill = "both", expand = True)
 		scroller.pack(anchor = "e", side = "right", fill = "y", expand = False, after = tree)
 		tree.configure(yscrollcommand = scroller.set)
-		# inventory = ["Shirt"] * 20              ### Replace with DATABASE
-		inventory = database.material("drifit")
+		inventory = database.material(self.material)
 		for item in inventory:
 			tree.insert('', 'end', text = item[0], values = (item[1], item[2]))
 
+	def loadCotton(self):
+		self.material = "cotton"
+		self.reloadtree()
+
+	def loadDrifit(self):
+		self.material = "drifit"
+		self.reloadtree()
+
 	def mainWidgets(self):
 		self.tree()
+		material = "cotton"
 		f1 = Frame(window)
 		f1.pack(anchor = "nw", side = "left", fill = "both", expand = False)
-		Label(f1, text = '//MATERIAL').pack()
-		Button(f1, text = "Cotton").pack()
-		Button(f1, text = "Drifit").pack()
+		Label(f1, text = "//MATERIAL").pack()
+		Button(f1, text = "Cotton", command = self.loadCotton).pack()
+		Button(f1, text = "Drifit", command = self.loadDrifit).pack()
 		Label(f1).pack()
 		Label(f1, text = "Filter By:").pack()
 		colorvar = StringVar(window)
@@ -55,8 +64,6 @@ class mainWindow:
 		Label(f1).pack()
 		Button(f1, text = "Shipment").pack()
 		Button(f1, text = "Remove").pack()
-		Label(f1).pack()
-		Button(f1, text = "RESET", command = lambda: self.reloadtree).pack()
 
 if __name__ == '__main__':
 	window = Tk()

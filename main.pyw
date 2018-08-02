@@ -5,6 +5,7 @@ Created for GUPI.USA
 """
 from tkinter import *
 from tkinter.ttk import *
+from inventory import *
 
 class mainWindow:
 	def __init__(self):
@@ -31,9 +32,10 @@ class mainWindow:
 		tree.pack(anchor = "w", side = "left", fill = "both", expand = True)
 		scroller.pack(anchor = "e", side = "right", fill = "y", expand = False, after = tree)
 		tree.configure(yscrollcommand = scroller.set)
-		inventory = ["Shirt"] * 20              ### Replace with DATABASE
+		# inventory = ["Shirt"] * 20              ### Replace with DATABASE
+		inventory = database.material("drifit")
 		for item in inventory:
-			tree.insert('', 'end', text = item, values = ("size", "qty"))
+			tree.insert('', 'end', text = item[0], values = (item[1], item[2]))
 
 	def mainWidgets(self):
 		self.tree()

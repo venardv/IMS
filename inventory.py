@@ -33,15 +33,21 @@ class database:
 		self.fetchall()
 		self.material(mat)
 
-	# def material(mat):
-	# 	c.execute("SELECT * FROM {}".format(mat))
-	# 	rows = c.fetchall()
-	# 	return rows
-
 	def Filter(mat, fil):
 		c.execute("SELECT DISTINCT {} FROM {}".format(fil, mat))
 		rows = c.fetchall()
 		return rows
+
+	def shipment(mat):
+		c.execute("SELECT * FROM {} WHERE color = ?".format(mat),("ASH",))
+		rows = c.fetchall()
+		return rows
+
+	def shUpdate(mat,sizes,qtys):
+		iterr = 0
+		for size, qty in zip(sizes, qtys):
+			c.execute("UPDATE {} SET quantity = ? WHERE color = 'ASH' AND size = ?".format(mat),(qty,size))
+			iterr += 1
 
 	def filtered(mat, color, size):
 		if color == "Color" and size == "Size":
@@ -59,6 +65,3 @@ class database:
 			c.execute("SELECT * FROM {} WHERE size = ? AND color = ?".format(mat),
 			(size, color))
 			return c.fetchall()
-
-	# def filterSize(mat):
-	# 	if mat == 

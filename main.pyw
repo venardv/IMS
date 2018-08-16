@@ -19,6 +19,7 @@ class mainWindow:
 		self.material = "cotton"
 		self.filterSize = "Size"
 		self.filterColor = "Color"
+		self.filterCol = "ASH"
 		self.entries = []
 		self.rowSize = []
 		self.rowQty = []
@@ -57,6 +58,7 @@ class mainWindow:
 		self.material = "cotton"
 		self.filterSize = "Size"
 		self.filterColor = "Color"
+		self.filterCol = "ASH"
 		self.reloadF1()
 		#self.reloadtree()
 
@@ -79,6 +81,8 @@ class mainWindow:
 		self.f2.destroy()
 		self.mainWidgets()
 
+	#def reloadF3(self):
+
 	def setMat(self, mat):
 		self.material = mat
 		self.filterColor = "Color"
@@ -87,7 +91,11 @@ class mainWindow:
 		self.shipment()
 
 	def setColor(self, *args):
-		print(self.colorvar2.get())
+		if self.colorvar2.get() != "Color":
+			self.filterCol = self.colorvar2.get()
+			self.f3.destroy()
+			self.f4.destroy()
+			self.shipment()
 
 	def shipment(self):
 		self.f1.destroy()
@@ -102,10 +110,8 @@ class mainWindow:
 
 		self.raise_frame(self.f3)
 		self.raise_frame(self.f4)
-		#self.material = "cotton"
 		self.filterSize = "Size"
-		self.filterColor = "Color"
-		rows = database.shipment(self.material)
+		rows = database.shipment(self.material, self.filterCol)
 		Label(self.f4, text = "Color").grid(row = 0, column = 0, padx = 5, pady  = 5)
 		Label(self.f4, text = "Size").grid(row = 0, column = 1, padx = 5, pady  = 5)
 		Label(self.f4, text = "Quantity").grid(row = 0, column = 2, padx = 5, pady  = 5)
@@ -158,7 +164,7 @@ class mainWindow:
 		if entryCheck == True:
 			for entry, qty in zip(entryList, self.rowQty):
 				newQty.append(entry+qty)
-			database.shUpdate(self.material, self.rowSize, newQty)
+			database.shUpdate(self.material, self.rowSize, self.filterCol, newQty)
 			Label(self.f4, text = "Updated!", foreground = "red").grid(row = 13, column = 1, columnspan = 2)
 			window.update()
 			sleep(1)

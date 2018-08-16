@@ -38,15 +38,15 @@ class database:
 		rows = c.fetchall()
 		return rows
 
-	def shipment(mat):
-		c.execute("SELECT * FROM {} WHERE color = ?".format(mat),("ASH",))
+	def shipment(mat,color):
+		c.execute("SELECT * FROM {} WHERE color = ?".format(mat),(color,))
 		rows = c.fetchall()
 		return rows
 
-	def shUpdate(mat,sizes,qtys):
+	def shUpdate(mat,sizes,color,qtys):
 		iterr = 0
 		for size, qty in zip(sizes, qtys):
-			c.execute("UPDATE {} SET quantity = ? WHERE color = 'ASH' AND size = ?".format(mat),(qty,size))
+			c.execute("UPDATE {} SET quantity = ? WHERE color = ? AND size = ?".format(mat),(qty,color,size))
 			iterr += 1
 
 	def filtered(mat, color, size):

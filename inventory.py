@@ -21,6 +21,9 @@ try:
 		"WHITE","YELLOW"):
 		for size in ("YXS","YS","YM","YL","YXL","S","M","L","XL","2X","3X","4X"):
 			conn.execute("INSERT INTO cotton VALUES (?, ?, 0)", (color, size))
+	for color in ("BLACK", "BLUE", "GRAY", "GREEN", "MAROON", "NAVY BLUE", 
+		"PINK", "PURPLE" "RED", "ROYAL BLUE", "WHITE", "YELLOW GOLD"):
+		for size in ("YXS","YS","YM","YL","YXL","S","M","L","XL","2X","3X","4X"):
 			conn.execute("INSERT INTO drifit VALUES (?, ?, 0)", (color, size))
 	conn.commit()
 except:

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-@AUTHOR: DARKSIDE VILLAIN
+@AUTHOR: venardv
 Created for GUPI.USA
 """
 from tkinter import *
